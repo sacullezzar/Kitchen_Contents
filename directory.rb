@@ -20,6 +20,7 @@ def view_menu
   puts "Where to look?"
   puts "1. Freezer"
   puts "2. Cupboard"
+  puts "3. Fridge"
   @loc = gets.chomp
 end
 
@@ -51,7 +52,37 @@ if @selection == "1"
         puts sentence(type)
       end
     end
+  elsif @loc == "3"
+    @food.each do |type|
+      if type[:location] == "fridge"
+        puts sentence(type)
+      end
+    end
   end
 elsif @selection == "2"
-  #add ingredients
+  puts "What would you like to add?"
+  item = gets.chomp
+  puts "What quantity of #{item}?"
+  qty = gets.chomp.to_f
+  puts "where is #{item} kept?"
+  puts "1 = freezer"
+  puts "2 = cupboard"
+  puts "3 = fridge"
+  loc = gets.chomp
+  if loc == "1"
+    @food << {name: item}
+    @food << {quantity: qty}
+    @food << {location: "freezer"}
+  elsif loc == "2"
+    @food << {name: item}
+    @food << {quantity: qty}
+    @food << {location: "cupboard"}
+  elsif loc == "3"
+    @food << {name: item}
+    @food << {quantity: qty}
+    @food << {location: "fridge"}
+  end
+
+print @food
+
 end
