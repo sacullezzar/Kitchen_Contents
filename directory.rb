@@ -12,20 +12,9 @@ def header_main
   puts "-------Main  Menu-------"
 end
 
-
-
-
 def sentence(hash)
   "#{hash[:name]} is in the #{hash[:location]}, you have #{hash[:quantity]}."
 end
-
-@food.each do |type|
-  if type[:location] == "freezer"
-    puts sentence(type)
-  end
-end
-
-
 
 def view_menu
   puts "Where to look?"
@@ -44,7 +33,7 @@ def contents_main
   puts "2. Add Ingredients"
   puts "------------------"
 end
-
+#program starts
 header_main
 contents_main
 selector
