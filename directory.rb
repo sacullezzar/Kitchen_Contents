@@ -1,45 +1,36 @@
 
-@freezer = [
-  {bread: 1.5},
-  {fish: 3.0},
-  {chips: 0.8},
+@food = [
+  {name: "bread", quantity: 1.5, location: "freezer"},
+  {name: "fish", quantity: 3.0, location: "freezer"},
+  {name: "chips", quantity: 0.8, location: "freezer"},
+  {name: "beans", quantity: 4, location: "cupboard"},
+  {name: "custard", quantity: 3, location: "cupboard"},
 ]
-
-@cupboard = [
-  {beans: 4},
-  {custard: 3},
-]
-
-def view_contents
-  loop do
-    menu
-    if @loc == "freezer"
-      puts "The freezer contains:"
-      @freezer.each do |item|
-        item.each_pair {|k, v| puts "- #{k} (x #{v})"}
-      end
-    elsif @loc == "exit"
-      exit
-    end
-
-    if @loc == "cupboard"
-      @freezer.each do |item|
-        item.each_pair {|k, v| puts "- #{k} (x #{v})"}
-      end
-    end
-  end
-end
-
-
-
-def main
+def header_main
   puts "Kitchen Stock Management"
   puts "------============------"
   puts "-------Main  Menu-------"
 end
 
-def menu
+
+
+
+def sentence(hash)
+  "#{hash[:name]} is in the #{hash[:location]}, you have #{hash[:quantity]}."
+end
+
+@food.each do |type|
+  if type[:location] == "freezer"
+    puts sentence(type)
+  end
+end
+
+
+
+def view_menu
   puts "Where to look?"
+  puts "1. Freezer"
+  puts "2. Cupboard"
   @loc = gets.chomp
 end
 
@@ -48,18 +39,30 @@ def selector
   @selection = gets.chomp
 end
 
-def contents
+def contents_main
   puts "1. View Location"
   puts "2. Add Ingredients"
   puts "------------------"
 end
 
-
-main
-contents
+header_main
+contents_main
 selector
 if @selection == "1"
-  view_contents
-else
-  exit
+  view_menu
+  if @loc == "1"
+    @food.each do |type|
+      if type[:location] == "freezer"
+        puts sentence(type)
+      end
+    end
+  elsif @loc == "2"
+    @food.each do |type|
+      if type[:location] == "cupboard"
+        puts sentence(type)
+      end
+    end
+  end
+elsif @selection == "2"
+  #add ingredients
 end
