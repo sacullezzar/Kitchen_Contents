@@ -5,6 +5,11 @@
   {chips: 0.8},
 ]
 
+@cupboard = [
+  {beans: 4},
+  {custard: 3},
+]
+
 def view_contents
   loop do
     menu
@@ -16,7 +21,21 @@ def view_contents
     elsif @loc == "exit"
       exit
     end
+
+    if @loc == "cupboard"
+      @freezer.each do |item|
+        item.each_pair {|k, v| puts "- #{k} (x #{v})"}
+      end
+    end
   end
+end
+
+
+
+def main
+  puts "Kitchen Stock Management"
+  puts "------============------"
+  puts "-------Main  Menu-------"
 end
 
 def menu
@@ -24,11 +43,6 @@ def menu
   @loc = gets.chomp
 end
 
-def main
-  puts "Kitchen Stock Management"
-  puts "------============------"
-  puts "-------Main  Menu-------"
-end
 def selector
   puts "Make your choice"
   @selection = gets.chomp
